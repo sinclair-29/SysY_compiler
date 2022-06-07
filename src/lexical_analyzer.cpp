@@ -1,35 +1,19 @@
 #include <iostream>
-#include <fstream>
-#include <sstream>
 #include <map>
 #include <cstdio>
 #include "dfa.h"
 #include "lexical_analyzer.h"
 
-int main() {
-	std::string filename;
-	/**
-	 * For debug
-	 * */
-	//filename = "test.txt";
-	std::cin >> filename;
-	std::ifstream infile(filename);
-
-	std::stringstream buffer;	
-	buffer << infile.rdbuf();
-	contents = buffer.str();
-	lexical_analyze();
-
-	infile.close();
-
-	return 0;
-}
-
-
+std::string contents;
+DFA dfa;
 
 void lexical_analyze() {
-	printf("%-30s%s\n", "TOKEN-TYPE", "TOKEN-VALUE");
-	printf("-------------------------------------------------\n");
+	/**
+	 * In this project, the result of scanner will not be displayed 
+	 * in the screen. Instead, the tokens will be stored in a token stream.
+	 * */
+	//printf("%-30s%s\n", "TOKEN-TYPE", "TOKEN-VALUE");
+	//printf("-------------------------------------------------\n");
 	DFA::initialize();	
 	int length = contents.size();
 	bool flag = false;

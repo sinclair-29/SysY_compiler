@@ -6,6 +6,7 @@
 #include <cstdio>
 #include <map>
 #include <iostream>
+#include <vector>
 
 extern int current_line;
 enum symbol {
@@ -39,6 +40,21 @@ bool isunderline(char);
 
 void output_error_message(std::string);
 void output_token(int type, std::string value);
+
+class Token {
+private:
+	token_type type;
+	std::string value;
+public:
+	Token() = default;
+	Token(token_type, std::string);
+	Token(int, std::string);
+
+	token_type get_token_type();
+	std::string get_value();
+};
+extern std::vector<Token> token_stream;
+
 
 class DFA {
 	typedef bool (DFA::*state) (char next_character);

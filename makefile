@@ -8,9 +8,9 @@ obj_dir = $(dest_dir)/objects
 bin_dir = $(dest_dir)/bin
 
 CC = g++
-RESULT = scanner
+RESULT = compiler
 CFLAGS = -Wall -O3 -std=c++14
-CFILES = lexical_analyzer.cpp dfa.cpp
+CFILES = lexical_analyzer.cpp dfa.cpp compiler.cpp block.cpp parser.cpp
 ofiles = $(CFILES:%.cpp=$(obj_dir)/%.o)
 
 program = $(bin_dir)/$(RESULT)

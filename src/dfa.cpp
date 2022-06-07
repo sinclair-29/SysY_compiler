@@ -26,76 +26,31 @@ int get_symbol(char _ch) {
 	return symbol::ILLEGAL;
 }
 
-void output_token(int type, std::string value) {
-	switch(type) {
-		case token_type::IDENTIFIER:
-			printf("%-30s", "identifier");
-			break;
-		case token_type::KEYWORD:
-			printf("%-30s", "keyword");
-			break;
-		case token_type::DECIMAL_INT:
-			printf("%-30s", "decimal_integer");
-			break;
-		case token_type::DECIMAL_FLOAT:
-			printf("%-30s", "decimal_float");
-			break;
-		case token_type::OCTAL_INT:
-			printf("%-30s", "octal_integer");
-			break;
-		case token_type::OCTAL_FLOAT:
-			printf("%-30s", "octal_float");
-			break;
-		case token_type::HEXADECIMAL_INT:
-			printf("%-30s", "hexadecimal_integer");
-			break;
-		case token_type::HEXADECIMAL_FLOAT:
-			printf("%-30s", "hexadecimal_float");
-			break;
-		case token_type::ARITHMETIC_OPERATOR:
-			printf("%-30s", "arithemetic_operator");
-			break;
-		case token_type::RELATION_OPERATOR:
-			printf("%-30s", "relationship_operator");
-			break;
-		case token_type::LEFT_PARENTHESIS:
-			printf("%-30s", "left_parenthesis");
-			break;
-		case token_type::LEFT_BRACE:
-			printf("%-30s", "left_brace");
-			break;
-		case token_type::LEFT_BRACKET:
-			printf("%-30s", "left_bracket");
-			break;
-		case token_type::RIGHT_PARENTHESIS:
-			printf("%-30s", "right_parenthesis");
-			break;
-		case token_type::RIGHT_BRACE:
-			printf("%-30s", "right_brace");
-			break;
-		case token_type::RIGHT_BRACKET:
-			printf("%-30s", "right_bracket");
-			break;
-		case token_type::COMMA:
-			printf("%-30s", "comma");
-			break;
-		case token_type::SEMICOLON:
-			printf("%-30s", "semicolon");
-			break;	
-		case token_type::BOOLEAN_OPERATOR:
-			printf("%-30s", "boolean_operator");
-			break;
-		case token_type::ASSIGNMENT:
-			printf("%-30s", "assignment");
-			break;
-	}
-	std::cout << value << std::endl;
-}
-
 void output_error_message(std::string err) {
 	printf("\nError at line %-3d: ", current_line);
 	std::cout << err << std::endl << std::endl;
 }
+
+std::vector<Token> token_stream;
+Token::Token(token_type _type, std::string _value) :
+	type(_type), value(_value) {}
+Token::Token(int _type, std::string _value) : value(_value) {
+	this->type = token_type(_type);
+}
+
+token_type Token::get_token_type() {
+	return this->type;
+}
+
+std::string Token::get_value() {
+	return this->value;
+}
+
+
+void output_token(int type, std::string value) {
+	token_stream.push_back(Token(type, value));
+}
+
 
 std::map<std::string, int> DFA::keyword;
 std::map<std::string, int> DFA::table;

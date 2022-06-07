@@ -3,9 +3,8 @@
 
 #include <cstring>
 
-std::string contents;
-int current_pos = 0;
-DFA dfa;
+extern std::string contents;
+extern DFA dfa;
 
 void lexical_analyze();
 bool isws(char ch);
